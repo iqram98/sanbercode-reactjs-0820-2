@@ -1,0 +1,27 @@
+.FormBuah {
+  width: 500px;
+  height: 300px;
+  border: 1px solid black;
+  border-radius: 25px;
+  margin: 20px auto;
+}
+
+.FormBuah h1 {
+  text-align: center;
+}
+.FormBuah table {
+  width: 450px;
+  margin: auto;
+}
+.FormBuah table tr td {
+  width: 100px;
+  height: 50px;
+}
+.FormBuah table tr:nth-child(2) {
+  vertical-align: bottom;
+}
+.FormBuah button {
+  margin-top: 20px;
+  margin-left: 25px;
+  border-radius: 25px;
+}
