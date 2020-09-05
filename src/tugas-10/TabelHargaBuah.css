@@ -1,6 +1,7 @@
 .TabelHargaBuah {
   width: 60%;
   margin: 20px auto;
+  border-radius: 25px;
 }
 .TabelHargaBuah h1 {
   text-align: center;
@@ -8,9 +9,10 @@
 
 .TabelHargaBuah table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border: 1px solid black;
+  border: 2px solid black;
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
+  margin: 20px auto;
 }
 
 .TabelHargaBuah table td {
