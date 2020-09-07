@@ -1,0 +1,31 @@
+.time {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.jam {
+  font-size: 30px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.hitung {
+  font-size: 30px;
+  float: right;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 850px) {
+  .time {
+    text-align: center;
+  }
+  .jam {
+    display: block;
+    margin: 5px 5px;
+  }
+  .hitung {
+    display: block;
+    margin: 5px 5px;
+    float: none;
+  }
+}
