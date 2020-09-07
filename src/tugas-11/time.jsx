@@ -28,7 +28,7 @@ class Time extends Component {
 
   getCurrentTime() {
     const time = new Date();
-    let currentTime = `${time.getHours()} : ${time.getMinutes()} : ${time.getSeconds()}`;
+    let currentTime = time.toLocaleTimeString("en-US");
     this.setState({ currentTime });
   }
 
