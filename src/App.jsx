@@ -1,118 +1,118 @@
-import React, { Component } from "react";
-// import FormBuah from "./tugas-9/FormBuah";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import TabelHargaBuah from "./tugas-10/TabelHargaBuah";
-// import Time from "./tugas-11/time";
-import Form from "./tugas-12/form";
+import Form from "./tugas-13/form";
 import "./App.css";
 
-class App extends Component {
-  state = {
-    // time: 100,
-    // showComponent: true,
-    dataHargaBuah: [
-      { nama: "Semangka", harga: 10000, berat: 1000 },
-      { nama: "Anggur", harga: 40000, berat: 500 },
-      { nama: "Strawberry", harga: 30000, berat: 400 },
-      { nama: "Jeruk", harga: 30000, berat: 1000 },
-      { nama: "Mangga", harga: 30000, berat: 500 },
-    ],
-    dataEdit: { nama: "", harga: "", berat: "" },
-    tambahBuah: false,
-    editBuah: false,
-    pesan: "",
-    showPesan: false,
+const App = () => {
+  const [dataHargaBuah, setDataHargaBuah] = useState(null);
+  const [dataEdit, setDataEdit] = useState({ nama: "", price: "", weight: "" });
+  const [tambahBuah, setTambahBuah] = useState(false);
+  const [editBuah, setEditBuah] = useState(false);
+  const [pesan, setPesan] = useState("");
+  const [showPesan, setShowPesan] = useState(false);
+
+  const unmountPesan = () => {
+    setTimeout(() => {
+      setShowPesan(false);
+    }, 3000);
   };
 
-  unmountPesan() {
-    setTimeout(() => {
-      this.setState({ showPesan: false });
-    }, 3000);
-  }
+  useEffect(() => {
+    if (dataHargaBuah === null) {
+      axios
+        .get(`http://backendexample.sanbercloud.com/api/fruits`)
+        .then((res) => {
+          setDataHargaBuah(res.data);
+        });
+    }
+  }, [dataHargaBuah]);
 
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     this.setState({
-  //       showComponent: false,
-  //     });
-  //   }, this.state.time * 1000);
-  // }
-
-  handleSubmit = (data) => {
-    if (data.index) {
-      let dataHargaBuah = [...this.state.dataHargaBuah];
-      dataHargaBuah.splice(data.index, 1, data);
-      this.setState({
-        dataHargaBuah,
-        editBuah: false,
-        pesan: "Berhasil Edit Data",
-        showPesan: true,
-      });
-      this.unmountPesan();
+  const handleSubmit = (data) => {
+    if (data.id) {
+      axios
+        .put(`http://backendexample.sanbercloud.com/api/fruits/${data.id}`, {
+          name: data.name,
+          price: data.price,
+          weight: data.weight,
+        })
+        .then((res) => {
+          let newDataHargaBuah = dataHargaBuah.map((x) => {
+            if (x.id === data.id) {
+              x.name = data.name;
+              x.price = data.price;
+              x.weight = data.weight;
+            }
+            return x;
+          });
+          setDataHargaBuah(newDataHargaBuah);
+        });
+      setEditBuah(false);
+      setPesan("Berhasil Edit Data");
+      setShowPesan(true);
+      setDataEdit({ nama: "", price: "", weight: "" });
+      unmountPesan();
     } else {
-      this.setState({
-        dataHargaBuah: [...this.state.dataHargaBuah, data],
-        tambahBuah: false,
-        pesan: "Berhasil Tambah Data",
-        showPesan: true,
-      });
-      this.unmountPesan();
+      axios
+        .post(`http://backendexample.sanbercloud.com/api/fruits`, {
+          name: data.name,
+          price: data.price,
+          weight: data.weight,
+        })
+        .then((res) => {
+          setDataHargaBuah([...dataHargaBuah, res.data]);
+        });
+      setTambahBuah(false);
+      setPesan("Berhasil Tambah Data");
+      setShowPesan(true);
+      setDataEdit({ nama: "", price: "", weight: "" });
+      unmountPesan();
     }
   };
 
-  handleCancel = (data) => {
-    this.setState({
-      tambahBuah: data,
-      editBuah: data,
-    });
+  const handleCancel = () => {
+    setTambahBuah(false);
+    setEditBuah(false);
+    setDataEdit({ nama: "", price: "", weight: "" });
   };
 
-  handleTambah = (tambahBuah) => {
-    this.setState({ tambahBuah });
+  const handleTambah = () => {
+    setTambahBuah(true);
   };
 
-  tombolEdit = (index) => {
-    let dataEdit = this.state.dataHargaBuah[index];
-    this.setState({
-      editBuah: true,
-      dataEdit: { ...dataEdit, index },
-    });
+  const tombolEdit = (index) => {
+    let edit = dataHargaBuah.find((x) => x.id === index);
+    setDataEdit({ ...edit });
+    setEditBuah(true);
   };
 
-  handleHapus = (index) => {
-    let dataHargaBuah = [...this.state.dataHargaBuah];
-    dataHargaBuah.splice(index, 1);
-    this.setState({
-      dataHargaBuah,
-      pesan: "Berhasil hapus data",
-      showPesan: true,
-    });
-    this.unmountPesan();
+  const handleHapus = (index) => {
+    axios
+      .delete(`http://backendexample.sanbercloud.com/api/fruits/${index}`)
+      .then((res) => {
+        let newDataHargaBuah = dataHargaBuah.filter((x) => x.id !== index);
+        setDataHargaBuah(newDataHargaBuah);
+      });
+
+    setPesan("Berhasil hapus data");
+    setShowPesan(true);
+    unmountPesan();
   };
 
-  render() {
-    return (
-      <div className="App">
-        {/* {this.state.showComponent === true ? (
-          <Time time={this.state.time} />
-        ) : null} */}
-        {/* <FormBuah /> */}
-        {this.state.tambahBuah === true || this.state.editBuah === true ? (
-          <Form
-            data={this.state.dataEdit}
-            submit={this.handleSubmit}
-            cancel={this.handleCancel}
-          />
-        ) : null}
-        <TabelHargaBuah
-          tambahBuah={this.handleTambah}
-          data={this.state.dataHargaBuah}
-          editBuah={this.tombolEdit}
-          hapusBuah={this.handleHapus}
-        />
-        {this.state.showPesan === true ? <p>{this.state.pesan}</p> : null}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      {tambahBuah === true || editBuah === true ? (
+        <Form data={dataEdit} submit={handleSubmit} cancel={handleCancel} />
+      ) : null}
+      <TabelHargaBuah
+        tambahBuah={handleTambah}
+        data={dataHargaBuah}
+        editBuah={tombolEdit}
+        hapusBuah={handleHapus}
+      />
+      {showPesan === true ? <p>{pesan}</p> : null}
+    </div>
+  );
+};
 
 export default App;

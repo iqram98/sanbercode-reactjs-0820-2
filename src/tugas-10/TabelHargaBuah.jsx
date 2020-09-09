@@ -3,7 +3,7 @@ import "./TabelHargaBuah.css";
 
 class TabelHargaBuah extends Component {
   handleTambah = () => {
-    this.props.tambahBuah(true);
+    this.props.tambahBuah();
   };
 
   handleEdit = (index) => {
@@ -27,29 +27,30 @@ class TabelHargaBuah extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.data.map((e, index) => {
-              return (
-                <tr key={index}>
-                  <td>{e.nama}</td>
-                  <td>Rp {e.harga}</td>
-                  <td>{e.berat / 1000} kg</td>
-                  <td>
-                    <button
-                      className="tombolEdit"
-                      onClick={() => this.handleEdit(index)}
-                    >
-                      edit
-                    </button>
-                    <button
-                      className="tombolHapus"
-                      onClick={() => this.handleHapus(index)}
-                    >
-                      hapus
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {this.props.data !== null &&
+              this.props.data.map((e, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{e.name}</td>
+                    <td>Rp {e.price}</td>
+                    <td>{e.weight / 1000} kg</td>
+                    <td>
+                      <button
+                        className="tombolEdit"
+                        onClick={() => this.handleEdit(e.id)}
+                      >
+                        edit
+                      </button>
+                      <button
+                        className="tombolHapus"
+                        onClick={() => this.handleHapus(e.id)}
+                      >
+                        hapus
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
         <button className="tombolTambah" onClick={this.handleTambah}>
