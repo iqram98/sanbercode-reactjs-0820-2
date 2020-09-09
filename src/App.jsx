@@ -6,7 +6,11 @@ import "./App.css";
 
 const App = () => {
   const [dataHargaBuah, setDataHargaBuah] = useState(null);
-  const [dataEdit, setDataEdit] = useState({ nama: "", price: "", weight: "" });
+  const [dataEdit, setDataEdit] = useState({
+    name: "",
+    price: "",
+    weight: "",
+  });
   const [tambahBuah, setTambahBuah] = useState(false);
   const [editBuah, setEditBuah] = useState(false);
   const [pesan, setPesan] = useState("");

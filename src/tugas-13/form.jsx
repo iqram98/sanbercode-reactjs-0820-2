@@ -12,11 +12,11 @@ const Form = (props) => {
   };
 
   const handleChangeHarga = (event) => {
-    setHarga(parseInt(event.target.value));
+    setHarga(event.target.value);
   };
 
   const handleChangeBerat = (event) => {
-    setBerat(parseInt(event.target.value));
+    setBerat(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -32,13 +32,13 @@ const Form = (props) => {
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
-        <h3>Tambah Buah</h3>
+        {props.data.price === "" ? <h3>Tambah Buah</h3> : <h3>Edit Buah</h3>}
         <label>Masukkan nama buah : </label>
         <input type="text" onChange={handleChangeNama} value={name} />
         <label>Harga : </label>
-        <input type="text" onChange={handleChangeHarga} value={price} />
+        <input type="number" onChange={handleChangeHarga} value={price} />
         <label>Berat (gram) : </label>
-        <input type="text" onChange={handleChangeBerat} value={weight} />
+        <input type="number" onChange={handleChangeBerat} value={weight} />
         <button className="tombolSubmit" type="submit">
           submit
         </button>
