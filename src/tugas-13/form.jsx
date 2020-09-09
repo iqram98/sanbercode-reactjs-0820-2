@@ -32,7 +32,7 @@ const Form = (props) => {
   return (
     <div className="form">
       <form onSubmit={handleSubmit}>
-        {props.data.price === "" ? <h3>Tambah Buah</h3> : <h3>Edit Buah</h3>}
+        {props.data.id === "" ? <h3>Tambah Buah</h3> : <h3>Edit Buah</h3>}
         <label>Masukkan nama buah : </label>
         <input type="text" onChange={handleChangeNama} value={name} />
         <label>Harga : </label>

@@ -7,6 +7,7 @@ import "./App.css";
 const App = () => {
   const [dataHargaBuah, setDataHargaBuah] = useState(null);
   const [dataEdit, setDataEdit] = useState({
+    id: "",
     name: "",
     price: "",
     weight: "",
