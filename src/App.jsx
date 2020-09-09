@@ -55,7 +55,7 @@ const App = () => {
       setEditBuah(false);
       setPesan("Berhasil Edit Data");
       setShowPesan(true);
-      setDataEdit({ nama: "", price: "", weight: "" });
+      setDataEdit({ name: "", price: "", weight: "" });
       unmountPesan();
     } else {
       axios
@@ -70,7 +70,7 @@ const App = () => {
       setTambahBuah(false);
       setPesan("Berhasil Tambah Data");
       setShowPesan(true);
-      setDataEdit({ nama: "", price: "", weight: "" });
+      setDataEdit({ name: "", price: "", weight: "" });
       unmountPesan();
     }
   };
@@ -78,7 +78,7 @@ const App = () => {
   const handleCancel = () => {
     setTambahBuah(false);
     setEditBuah(false);
-    setDataEdit({ nama: "", price: "", weight: "" });
+    setDataEdit({ name: "", price: "", weight: "" });
   };
 
   const handleTambah = () => {
