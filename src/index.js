@@ -2,12 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Buah from "./tugas-14/buah";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Buah />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

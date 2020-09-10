@@ -7,15 +7,15 @@ const BuahList = () => {
   const [
     dataHargaBuah,
     setDataHargaBuah,
-    dataEdit,
+    ,
     setDataEdit,
-    tambahBuah,
+    ,
     setTambahBuah,
-    editBuah,
+    ,
     setEditBuah,
-    pesan,
+    ,
     setPesan,
-    showPesan,
+    ,
     setShowPesan,
   ] = useContext(BuahContext);
 

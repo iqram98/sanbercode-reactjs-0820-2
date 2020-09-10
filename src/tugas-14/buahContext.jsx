@@ -6,10 +6,10 @@ export const BuahContext = createContext();
 export const BuahProvider = (props) => {
   const [dataHargaBuah, setDataHargaBuah] = useState(null);
   const [dataEdit, setDataEdit] = useState({
-    id: "",
     name: "",
     price: "",
     weight: "",
+    id: null,
   });
   const [tambahBuah, setTambahBuah] = useState(false);
   const [editBuah, setEditBuah] = useState(false);

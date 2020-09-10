@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { BuahContext } from "./buahContext";
 import axios from "axios";
 import "../tugas-13/form.css";
@@ -13,16 +13,11 @@ const BuahForm = () => {
     setTambahBuah,
     editBuah,
     setEditBuah,
-    pesan,
+    ,
     setPesan,
-    showPesan,
+    ,
     setShowPesan,
   ] = useContext(BuahContext);
-
-  const [name, setNama] = useState(dataEdit.name);
-  const [price, setHarga] = useState(dataEdit.price);
-  const [weight, setBerat] = useState(dataEdit.weight);
-  const [id] = useState(dataEdit.id);
 
   const unmountPesan = () => {
     setTimeout(() => {
@@ -30,32 +25,44 @@ const BuahForm = () => {
     }, 3000);
   };
 
-  const handleChangeNama = (event) => {
-    setNama(event.target.value);
+  const handleChange = (event) => {
+    let typeOfInput = event.target.name;
+    switch (typeOfInput) {
+      case "name": {
+        setDataEdit({ ...dataEdit, name: event.target.value });
+        break;
+      }
+      case "price": {
+        setDataEdit({ ...dataEdit, price: event.target.value });
+        break;
+      }
+      case "weight": {
+        setDataEdit({ ...dataEdit, weight: event.target.value });
+        break;
+      }
+      default:
+        break;
+    }
   };
 
-  const handleChangeHarga = (event) => {
-    setHarga(event.target.value);
-  };
-
-  const handleChangeBerat = (event) => {
-    setBerat(event.target.value);
-  };
-
-  const handleSubmit = (data) => {
-    if (data.id) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (dataEdit.id !== null) {
       axios
-        .put(`http://backendexample.sanbercloud.com/api/fruits/${data.id}`, {
-          name: data.name,
-          price: data.price,
-          weight: data.weight,
-        })
+        .put(
+          `http://backendexample.sanbercloud.com/api/fruits/${dataEdit.id}`,
+          {
+            name: dataEdit.name,
+            price: dataEdit.price,
+            weight: dataEdit.weight,
+          }
+        )
         .then((res) => {
           let newDataHargaBuah = dataHargaBuah.map((x) => {
-            if (x.id === data.id) {
-              x.name = data.name;
-              x.price = data.price;
-              x.weight = data.weight;
+            if (x.id === dataEdit.id) {
+              x.name = dataEdit.name;
+              x.price = dataEdit.price;
+              x.weight = dataEdit.weight;
             }
             return x;
           });
@@ -69,9 +76,9 @@ const BuahForm = () => {
     } else {
       axios
         .post(`http://backendexample.sanbercloud.com/api/fruits`, {
-          name: data.name,
-          price: data.price,
-          weight: data.weight,
+          name: dataEdit.name,
+          price: dataEdit.price,
+          weight: dataEdit.weight,
         })
         .then((res) => {
           setDataHargaBuah([...dataHargaBuah, res.data]);
@@ -90,23 +97,32 @@ const BuahForm = () => {
     setDataEdit({ name: "", price: "", weight: "" });
   };
 
-  const tombolSubmit = (event) => {
-    event.preventDefault();
-    setDataEdit({ name, price, weight, id });
-    handleSubmit({ name, price, weight, id });
-  };
-
   if (tambahBuah === true || editBuah === true) {
     return (
       <div className="form">
-        <form onSubmit={tombolSubmit}>
+        <form onSubmit={handleSubmit}>
           <h3>Tambah Buah</h3>
           <label>Masukkan nama buah : </label>
-          <input type="text" onChange={handleChangeNama} value={name} />
+          <input
+            name="name"
+            type="text"
+            onChange={handleChange}
+            value={dataEdit.name}
+          />
           <label>Harga : </label>
-          <input type="number" onChange={handleChangeHarga} value={price} />
+          <input
+            name="price"
+            type="number"
+            onChange={handleChange}
+            value={dataEdit.price}
+          />
           <label>Berat (gram) : </label>
-          <input type="number" onChange={handleChangeBerat} value={weight} />
+          <input
+            name="weight"
+            type="number"
+            onChange={handleChange}
+            value={dataEdit.weight}
+          />
           <button className="tombolSubmit" type="submit">
             submit
           </button>
