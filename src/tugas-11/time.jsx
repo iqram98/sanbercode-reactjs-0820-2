@@ -3,13 +3,22 @@ import "./time.css";
 
 class Time extends Component {
   state = {
-    time: this.props.time,
+    time: 10,
     currentTime: "",
+    visibleTime: true,
   };
 
   componentDidMount() {
     this.timeCount = setInterval(() => this.tick(), 1000);
     this.timeNow = setInterval(() => this.getCurrentTime(), 1000);
+  }
+
+  componentDidUpdate() {
+    if (this.state.visibleTime === true) {
+      if (this.state.time <= 0) {
+        this.setState({ visibleTime: false });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -19,10 +28,14 @@ class Time extends Component {
 
   render() {
     return (
-      <div className="time">
-        <p className="jam">Sekarang jam : {this.state.currentTime} </p>
-        <p className="hitung">Hitung mundur : {this.state.time} </p>
-      </div>
+      <>
+        {this.state.visibleTime && (
+          <div className="time">
+            <p className="jam">Sekarang jam : {this.state.currentTime} </p>
+            <p className="hitung">Hitung mundur : {this.state.time} </p>
+          </div>
+        )}
+      </>
     );
   }
 

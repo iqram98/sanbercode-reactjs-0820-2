@@ -1,18 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import "./TabelHargaBuah.css";
 
-class TabelHargaBuah extends Component {
-  handleTambah = () => {
-    this.props.tambahBuah();
-  };
+let dataHargaBuah = [
+  { nama: "Semangka", harga: 10000, berat: 1000 },
+  { nama: "Anggur", harga: 40000, berat: 500 },
+  { nama: "Strawberry", harga: 30000, berat: 400 },
+  { nama: "Jeruk", harga: 30000, berat: 1000 },
+  { nama: "Mangga", harga: 30000, berat: 500 },
+];
 
-  handleEdit = (index) => {
-    this.props.editBuah(index);
-  };
-  handleHapus = (index) => {
-    this.props.hapusBuah(index);
-  };
-
+class TabelHargaBuah extends React.Component {
   render() {
     return (
       <div className="TabelHargaBuah">
@@ -23,39 +20,20 @@ class TabelHargaBuah extends Component {
               <th>Nama</th>
               <th>Harga</th>
               <th>Berat</th>
-              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.data !== null &&
-              this.props.data.map((e, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{e.name}</td>
-                    <td>Rp {e.price}</td>
-                    <td>{e.weight / 1000} kg</td>
-                    <td>
-                      <button
-                        className="tombolEdit"
-                        onClick={() => this.handleEdit(e.id)}
-                      >
-                        edit
-                      </button>
-                      <button
-                        className="tombolHapus"
-                        onClick={() => this.handleHapus(e.id)}
-                      >
-                        hapus
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+            {dataHargaBuah.map((e) => {
+              return (
+                <tr>
+                  <td>{e.nama}</td>
+                  <td>{e.harga}</td>
+                  <td>{e.berat}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-        <button className="tombolTambah" onClick={this.handleTambah}>
-          Tambah Buah
-        </button>
       </div>
     );
   }

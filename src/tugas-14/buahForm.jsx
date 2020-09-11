@@ -26,23 +26,7 @@ const BuahForm = () => {
   };
 
   const handleChange = (event) => {
-    let typeOfInput = event.target.name;
-    switch (typeOfInput) {
-      case "name": {
-        setDataEdit({ ...dataEdit, name: event.target.value });
-        break;
-      }
-      case "price": {
-        setDataEdit({ ...dataEdit, price: event.target.value });
-        break;
-      }
-      case "weight": {
-        setDataEdit({ ...dataEdit, weight: event.target.value });
-        break;
-      }
-      default:
-        break;
-    }
+    setDataEdit({ ...dataEdit, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event) => {

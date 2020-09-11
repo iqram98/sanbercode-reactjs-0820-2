@@ -2,3 +2,61 @@
   text-align: center;
   color: green;
 }
+
+.light {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background-color: rgb(0, 51, 102);
+  color: white;
+}
+
+.light li {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 0 10px;
+  color: white;
+}
+
+.light li:hover {
+  background-color: rgb(37, 169, 224);
+}
+
+.dark {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background-color: rgb(37, 169, 224);
+  color: white;
+}
+
+.dark li {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 0 10px;
+  color: white;
+}
+
+.dark li:hover {
+  background-color: rgb(0, 51, 102);
+}
+
+.buttonTheme {
+  padding: 4px 8px;
+  margin-right: 5px;
+  color: white;
+  background-color: rgb(111, 243, 107);
+  border: 1px solid rgb(215, 216, 255);
+  border-radius: 5px;
+  text-shadow: 0 2px 2px gray;
+  box-shadow: 0px 1px 2px gray;
+  cursor: pointer;
+}
+
+.buttonTheme:hover {
+  background-color: rgb(78, 190, 74);
+}
